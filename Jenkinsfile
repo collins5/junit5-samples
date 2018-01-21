@@ -14,6 +14,20 @@ pipeline {
         }
       }
     }
+
+ stages {
+        stage('Test') {
+            steps {
+                sh './gradlew check'
+            }
+        }
+    }
+    post {
+        always {
+            junit 'build/reports/**/*.xml'
+        }
+    }
+
     stage('junit5-java9-engine') {
       tools {
         jdk 'Oracle JDK 9'
